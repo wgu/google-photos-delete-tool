@@ -14,7 +14,7 @@ const ELEMENT_SELECTORS = {
 // Time Configuration (in milliseconds)
 const TIME_CONFIG = {
     delete_cycle: 10000,
-    press_button_delay: 2000
+    press_button_delay: 1000
 };
 
 const MAX_RETRIES = 10;
@@ -28,12 +28,12 @@ let buttons = {
 }
 
 let deleteTask = setInterval(() => {
-    let attemptCount = 1;
-
     do {
         checkboxes = document.querySelectorAll(ELEMENT_SELECTORS['checkboxClass']);
-
-    } while (checkboxes.length <= 0 && attemptCount++ < MAX_RETRIES);
+	    if (checkboxes.length <= 0) {
+		    setTimeout(() => {}, 1000);
+	    }
+    } while (checkboxes.length <= 0);
 
 
     if (checkboxes.length <= 0) {
